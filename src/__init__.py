@@ -1,0 +1,3 @@
+"""
+DDoSGuard package initialization.
+"""

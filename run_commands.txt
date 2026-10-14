@@ -1,0 +1,137 @@
+================================================================================
+DDoSGuard: Complete Step-by-Step Command Runbook (Windows PowerShell)
+Academic Project: 19MAM56 CAT II — Advanced Machine Learning Lab
+Institution: Coimbatore Institute of Technology (CIT), Coimbatore
+Department: Department of Computing (Artificial Intelligence & Machine Learning)
+================================================================================
+
+--------------------------------------------------------------------------------
+PART 1: QUICK START (RUN CORE SERVICES)
+--------------------------------------------------------------------------------
+
+1. Start FastAPI REST Backend (Port 8000):
+   .\.venv\Scripts\python.exe -m uvicorn api.main:app --host 0.0.0.0 --port 8000
+
+2. Start Streamlit SOC Dashboard (Port 8501):
+   .\.venv\Scripts\python.exe -m streamlit run dashboard\app.py --server.port 8501
+
+3. Run Full Automated Test Suite (14 Tests):
+   .\.venv\Scripts\python.exe -m pytest tests\ -v
+
+   Web Access Links:
+   • Streamlit SOC Dashboard : http://localhost:8501
+   • Interactive Swagger Docs: http://localhost:8000/docs
+   • FastAPI Health Check    : http://localhost:8000/health
+   • Model Metrics Endpoint  : http://localhost:8000/metrics
+
+--------------------------------------------------------------------------------
+PART 2: FULL LIFECYCLE REPRODUCTION (STEP-BY-STEP FROM RAW DATA TO DEPLOYMENT)
+--------------------------------------------------------------------------------
+
+[STEP 0] Setup Environment & Dependencies
+   cd c:\Users\saira\Desktop\AML_CAT2
+   python -m venv .venv
+   .\.venv\Scripts\python.exe -m pip install --upgrade pip
+   .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+
+[STEP 1] Raw Dataset Telemetry Inspection
+   Inspects raw CIC-IDS-2017 Friday DDoS network flow capture, checks column integrity,
+   class distributions, inf/nan values, and saves metadata to artifacts/metrics/.
+   Command:
+   .\.venv\Scripts\python.exe src\inspect_dataset.py
+
+[STEP 2] Preprocessing & Stratified 70/15/15 Partitioning (Zero-Leakage)
+   Cleans infinite values, fits median imputers strictly on training data, excludes
+   network identifier leakage (IPs, Ports, Flow IDs), and produces train/val/test splits.
+   Command:
+   .\.venv\Scripts\python.exe src\preprocessing.py
+
+[STEP 3] Model Training & Hyperparameter Search (Random Forest vs XGBoost)
+   Trains baseline Random Forest and champion Hist-XGBoost classifier with Stratified
+   K-Fold validation; serializes pipeline to models/best_model_pipeline.joblib.
+   Command:
+   .\.venv\Scripts\python.exe src\train.py
+
+[STEP 4] Held-Out Test Split Evaluation (33,862 flows)
+   Evaluates models against unseen test partition (33,862 flows), generating latency
+   profiles, confusion matrix data, ROC-AUC, and PR-AUC scores.
+   Command:
+   .\.venv\Scripts\python.exe src\evaluate.py
+
+[STEP 5] SHAP Explainability & Publication Visualizations
+   Computes TreeExplainer attributions for top 15 features across 500 test samples
+   and renders high-resolution publication charts in artifacts/plots/.
+   Commands:
+   .\.venv\Scripts\python.exe src\explainability.py
+   .\.venv\Scripts\python.exe src\visualizations.py
+
+[STEP 6] Run Full Automated Test Suite (14 Tests)
+   Validates API endpoints, input schema bounds, model loading, zero identifier leakage,
+   label mapping, and Streamlit UI badge rendering.
+   Command:
+   .\.venv\Scripts\python.exe -m pytest tests\ -v
+
+[STEP 7] Launch FastAPI Production Inference Engine
+   Serves REST endpoints for single-flow and batch DDoS classification on port 8000.
+   Command:
+   .\.venv\Scripts\python.exe -m uvicorn api.main:app --host 0.0.0.0 --port 8000
+
+[STEP 8] Launch Streamlit SOC Monitoring Dashboard
+   Starts the minimalist light-theme cybersecurity dashboard on port 8501.
+   Command:
+   .\.venv\Scripts\python.exe -m streamlit run dashboard\app.py --server.port 8501
+
+--------------------------------------------------------------------------------
+PART 3: LIVE REST API VERIFICATION & SAMPLE INFERENCE
+--------------------------------------------------------------------------------
+
+[VERIFY 1] API Health Endpoint
+   curl.exe -X GET "http://localhost:8000/health"
+   # Or via PowerShell native cmdlet:
+   Invoke-RestMethod -Uri "http://localhost:8000/health" -Method Get
+
+[VERIFY 2] API Metrics Endpoint
+   curl.exe -X GET "http://localhost:8000/metrics"
+   # Or via PowerShell native cmdlet:
+   Invoke-RestMethod -Uri "http://localhost:8000/metrics" -Method Get
+
+[VERIFY 3] Send Live DDoS Attack Flow Prediction Request
+   .\.venv\Scripts\python.exe -c "import requests, json; s=json.load(open('artifacts/sample_records.json')); r=requests.post('http://localhost:8000/predict', json={'features': s['ddos_sample']}); print(r.json())"
+
+[VERIFY 4] Send Live Benign Normal Flow Prediction Request
+   .\.venv\Scripts\python.exe -c "import requests, json; s=json.load(open('artifacts/sample_records.json')); r=requests.post('http://localhost:8000/predict', json={'features': s['benign_sample']}); print(r.json())"
+
+--------------------------------------------------------------------------------
+PART 4: DOCKER CONTAINER DEPLOYMENT (CONTAINERIZED WORKFLOW)
+--------------------------------------------------------------------------------
+
+1. Build and Run All Services via Docker Compose:
+   docker compose up --build
+
+2. Run in Detached Mode (Background):
+   docker compose up -d
+
+3. Stop Services:
+   docker compose down
+
+--------------------------------------------------------------------------------
+PART 5: PORT CONFLICT & TROUBLESHOOTING RUNBOOK
+--------------------------------------------------------------------------------
+
+If port 8000 or 8501 is occupied by a previously running process:
+
+1. Identify the process ID (PID) occupying port 8000 or 8501:
+   Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue | Select-Object LocalAddress, LocalPort, OwningProcess
+   Get-NetTCPConnection -LocalPort 8501 -ErrorAction SilentlyContinue | Select-Object LocalAddress, LocalPort, OwningProcess
+
+2. Terminate the blocking process using its PID (replace <PID> with the actual process ID):
+   Stop-Process -Id <PID> -Force
+
+3. Custom Ports Configuration:
+   • To run FastAPI on port 8080:
+     .\.venv\Scripts\python.exe -m uvicorn api.main:app --host 0.0.0.0 --port 8080
+
+   • To configure Streamlit to point to custom API port:
+     $env:DDOSGUARD_API_URL = "http://localhost:8080"
+     .\.venv\Scripts\python.exe -m streamlit run dashboard\app.py --server.port 8502
+================================================================================

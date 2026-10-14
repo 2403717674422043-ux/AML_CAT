@@ -1,0 +1,51 @@
+{
+  "selected_model": "XGBoost",
+  "selection_criterion": "Validation Composite Score = 0.4*F1 + 0.3*Recall + 0.3*PR-AUC (balancing false negative penalty against precision)",
+  "rf_composite_score": 0.99984,
+  "xgb_composite_score": 0.99997,
+  "random_forest_val": {
+    "accuracy": 0.99982,
+    "precision": 1.0,
+    "recall": 0.99969,
+    "f1_score": 0.99984,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "true_negatives": 14657,
+    "false_positives": 0,
+    "false_negatives": 6,
+    "true_positives": 19198,
+    "confusion_matrix": [
+      [
+        14657,
+        0
+      ],
+      [
+        6,
+        19198
+      ]
+    ]
+  },
+  "xgboost_val": {
+    "accuracy": 0.99997,
+    "precision": 1.0,
+    "recall": 0.99995,
+    "f1_score": 0.99997,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "true_negatives": 14657,
+    "false_positives": 0,
+    "false_negatives": 1,
+    "true_positives": 19203,
+    "confusion_matrix": [
+      [
+        14657,
+        0
+      ],
+      [
+        1,
+        19203
+      ]
+    ]
+  },
+  "champion_artifact": "models\\best_model_pipeline.joblib"
+}

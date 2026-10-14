@@ -1,0 +1,244 @@
+{
+  "Random Forest": {
+    "model_name": "Random Forest",
+    "accuracy": 0.99988,
+    "precision": 1.0,
+    "recall": 0.99979,
+    "f1_score": 0.9999,
+    "macro_f1": 0.99988,
+    "weighted_f1": 0.99988,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "confusion_matrix": [
+      [
+        14658,
+        0
+      ],
+      [
+        4,
+        19200
+      ]
+    ],
+    "per_class": {
+      "BENIGN": {
+        "precision": 0.9997271859227936,
+        "recall": 1.0,
+        "f1-score": 0.9998635743519781,
+        "support": 14658.0
+      },
+      "DDoS": {
+        "precision": 1.0,
+        "recall": 0.9997917100604041,
+        "f1-score": 0.9998958441828976,
+        "support": 19204.0
+      },
+      "accuracy": 0.999881873486504,
+      "macro avg": {
+        "precision": 0.9998635929613968,
+        "recall": 0.9998958550302021,
+        "f1-score": 0.9998797092674379,
+        "support": 33862.0
+      },
+      "weighted avg": {
+        "precision": 0.9998819057130798,
+        "recall": 0.999881873486504,
+        "f1-score": 0.9998818753924654,
+        "support": 33862.0
+      }
+    },
+    "latency_profile": {
+      "sample_size": 1000,
+      "mean_ms": 43.8803,
+      "median_p50_ms": 32.1925,
+      "p95_ms": 78.8462,
+      "p99_ms": 103.3074,
+      "methodology": "Single-record sequential predict calls with warm-up on held-out test set"
+    },
+    "error_analysis": {
+      "false_positive_count": 0,
+      "false_negative_count": 4,
+      "true_positive_count": 19200,
+      "true_negative_count": 14658,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.00021,
+      "feature_diagnostics": {
+        "benign_baseline_means": {
+          "Flow Packets/s": 35618.28,
+          "Flow Bytes/s": 1226771.21,
+          "Total Fwd Packets": 5.05,
+          "Flow Duration": 15350764.29
+        },
+        "false_positive_means": {},
+        "false_negative_means": {
+          "Flow Packets/s": 24454.99,
+          "Flow Bytes/s": 146729.94,
+          "Total Fwd Packets": 1.25,
+          "Flow Duration": 124.0
+        }
+      },
+      "operational_impact": {
+        "false_positives": "Benign enterprise flows falsely flagged as DDoS; may cause legitimate customer traffic dropping or unnecessary SOC alert triage.",
+        "false_negatives": "Active DDoS attack flows that bypass detection; could lead to upstream service degradation or service downtime if mitigation is not triggered."
+      }
+    },
+    "total_test_eval_time_sec": 0.28
+  },
+  "XGBoost": {
+    "model_name": "XGBoost",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "macro_f1": 1.0,
+    "weighted_f1": 1.0,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "confusion_matrix": [
+      [
+        14658,
+        0
+      ],
+      [
+        0,
+        19204
+      ]
+    ],
+    "per_class": {
+      "BENIGN": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 14658.0
+      },
+      "DDoS": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 19204.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 33862.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 33862.0
+      }
+    },
+    "latency_profile": {
+      "sample_size": 1000,
+      "mean_ms": 4.3579,
+      "median_p50_ms": 4.1698,
+      "p95_ms": 5.0319,
+      "p99_ms": 5.4314,
+      "methodology": "Single-record sequential predict calls with warm-up on held-out test set"
+    },
+    "error_analysis": {
+      "false_positive_count": 0,
+      "false_negative_count": 0,
+      "true_positive_count": 19204,
+      "true_negative_count": 14658,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0,
+      "feature_diagnostics": {
+        "benign_baseline_means": {
+          "Flow Packets/s": 35618.28,
+          "Flow Bytes/s": 1226771.21,
+          "Total Fwd Packets": 5.05,
+          "Flow Duration": 15350764.29
+        },
+        "false_positive_means": {},
+        "false_negative_means": {}
+      },
+      "operational_impact": {
+        "false_positives": "Benign enterprise flows falsely flagged as DDoS; may cause legitimate customer traffic dropping or unnecessary SOC alert triage.",
+        "false_negatives": "Active DDoS attack flows that bypass detection; could lead to upstream service degradation or service downtime if mitigation is not triggered."
+      }
+    },
+    "total_test_eval_time_sec": 0.18
+  },
+  "Champion (Best)": {
+    "model_name": "Champion (Best)",
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "macro_f1": 1.0,
+    "weighted_f1": 1.0,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "confusion_matrix": [
+      [
+        14658,
+        0
+      ],
+      [
+        0,
+        19204
+      ]
+    ],
+    "per_class": {
+      "BENIGN": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 14658.0
+      },
+      "DDoS": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 19204.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 33862.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 33862.0
+      }
+    },
+    "latency_profile": {
+      "sample_size": 1000,
+      "mean_ms": 4.3803,
+      "median_p50_ms": 4.1646,
+      "p95_ms": 4.8728,
+      "p99_ms": 5.3644,
+      "methodology": "Single-record sequential predict calls with warm-up on held-out test set"
+    },
+    "error_analysis": {
+      "false_positive_count": 0,
+      "false_negative_count": 0,
+      "true_positive_count": 19204,
+      "true_negative_count": 14658,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0,
+      "feature_diagnostics": {
+        "benign_baseline_means": {
+          "Flow Packets/s": 35618.28,
+          "Flow Bytes/s": 1226771.21,
+          "Total Fwd Packets": 5.05,
+          "Flow Duration": 15350764.29
+        },
+        "false_positive_means": {},
+        "false_negative_means": {}
+      },
+      "operational_impact": {
+        "false_positives": "Benign enterprise flows falsely flagged as DDoS; may cause legitimate customer traffic dropping or unnecessary SOC alert triage.",
+        "false_negatives": "Active DDoS attack flows that bypass detection; could lead to upstream service degradation or service downtime if mitigation is not triggered."
+      }
+    },
+    "total_test_eval_time_sec": 0.15
+  }
+}

@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Data files (Exclude large raw pcap CSVs)
+data/raw/
+*.csv
+!artifacts/**/*.csv
+data/processed/*.parquet
+
+# Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+credentials/
+**/credentials.json
+**/secrets.json
+*.pem
+*.key
+*.p12
+*.pfx
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+
+# Temporary and backup files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo

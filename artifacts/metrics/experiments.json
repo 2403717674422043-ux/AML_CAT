@@ -1,0 +1,58 @@
+[
+  {
+    "experiment_id": "random_forest_1791991675",
+    "timestamp": "2026-10-14 20:57:55",
+    "model_name": "Random Forest",
+    "dataset_name": "Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv",
+    "dataset_fingerprint": "929be656862f13c1",
+    "random_seed": 42,
+    "split_strategy": "Stratified 70/15/15",
+    "hyperparameters": {},
+    "training_duration_sec": 0.0,
+    "inference_latency_ms": 43.8803,
+    "val_metrics": {},
+    "test_metrics": {
+      "accuracy": 0.99988,
+      "precision": 1.0,
+      "recall": 0.99979,
+      "f1_score": 0.9999,
+      "macro_f1": 0.99988,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "false_positives": 0,
+      "false_negatives": 4
+    },
+    "artifact_path": "models\\random_forest_pipeline.joblib",
+    "python_version": "3.13.7",
+    "os": "Windows",
+    "notes": "Test set evaluation on 33862 held-out samples."
+  },
+  {
+    "experiment_id": "xgboost_1791991680",
+    "timestamp": "2026-10-14 20:58:00",
+    "model_name": "XGBoost",
+    "dataset_name": "Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv",
+    "dataset_fingerprint": "929be656862f13c1",
+    "random_seed": 42,
+    "split_strategy": "Stratified 70/15/15",
+    "hyperparameters": {},
+    "training_duration_sec": 0.0,
+    "inference_latency_ms": 4.3579,
+    "val_metrics": {},
+    "test_metrics": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "macro_f1": 1.0,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "artifact_path": "models\\xgboost_pipeline.joblib",
+    "python_version": "3.13.7",
+    "os": "Windows",
+    "notes": "Test set evaluation on 33862 held-out samples."
+  }
+]

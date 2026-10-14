@@ -1,0 +1,28 @@
+{
+  "method": "SHAP TreeExplainer (Shapley Additive exPlanations)",
+  "sample_size": 500,
+  "champion_model": "XGBClassifier",
+  "top_features": {
+    "Fwd Packet Length Max": 3.623067,
+    "Total Length of Fwd Packets": 2.257275,
+    "Destination Port": 1.688736,
+    "Init_Win_bytes_backward": 1.230346,
+    "Init_Win_bytes_forward": 1.085313,
+    "Fwd Packet Length Mean": 0.923199,
+    "Idle Min": 0.368029,
+    "Fwd Header Length": 0.34232,
+    "Flow Duration": 0.301649,
+    "Flow IAT Std": 0.291916,
+    "Bwd IAT Total": 0.272768,
+    "Bwd Header Length": 0.237402,
+    "Fwd Packets/s": 0.237249,
+    "Flow Packets/s": 0.218063,
+    "FIN Flag Count": 0.215114,
+    "Fwd IAT Total": 0.201778,
+    "Bwd IAT Max": 0.195088,
+    "Fwd IAT Max": 0.189885,
+    "Fwd Packet Length Std": 0.153909,
+    "ACK Flag Count": 0.148762
+  },
+  "causality_caveat": "Important: Feature attribution reflects statistical correlations in the CIC-IDS-2017 benchmark dataset, not physical or causal network packet generation mechanics."
+}

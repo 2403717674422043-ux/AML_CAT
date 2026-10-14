@@ -1,0 +1,3 @@
+experiment_id,timestamp,model_name,train_duration_s,latency_ms,val_accuracy,val_f1,val_recall,val_precision,val_roc_auc,val_pr_auc,test_accuracy,test_f1,test_recall,test_precision,test_roc_auc,test_pr_auc,artifact_path
+random_forest_1791991675,2026-10-14 20:57:55,Random Forest,0.0,43.8803,,,,,,,0.99988,0.9999,0.99979,1.0,1.0,1.0,models\random_forest_pipeline.joblib
+xgboost_1791991680,2026-10-14 20:58:00,XGBoost,0.0,4.3579,,,,,,,1.0,1.0,1.0,1.0,1.0,1.0,models\xgboost_pipeline.joblib
