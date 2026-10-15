@@ -4,8 +4,7 @@ FROM python:3.11-slim
 # System setup
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    DEBIAN_FRONTEND=noninteractive \
-    PORT=8501
+    DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /app
 
@@ -30,8 +29,8 @@ COPY entrypoint.sh .
 # Ensure entrypoint is executable
 RUN chmod +x entrypoint.sh
 
-# Expose ports: 8000 (FastAPI), 8501 (Streamlit standard), 7860 (Hugging Face Spaces)
-EXPOSE 8000 8501 7860
+# Render routes public traffic to the Streamlit port; FastAPI stays internal on 8000.
+EXPOSE 10000
 
 # Docker Healthcheck on API service
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
